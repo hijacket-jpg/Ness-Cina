@@ -1,0 +1,365 @@
+:root {
+    --color-fondo-1: #ffb6c1;
+    --color-fondo-2: #ffc0cb;
+    --color-fondo-3: #ff69b4;
+    --color-papel: #fdf8eb;
+    --color-texto: #4a3b32;
+    --color-boton: #ff4d6d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(-45deg, var(--color-fondo-1), var(--color-fondo-2), var(--color-fondo-3));
+    background-size: 400% 400%;
+    animation: degradadoFondo 15s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+@keyframes degradadoFondo {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+#contenedor-particulas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; 
+    z-index: 1;
+}
+
+.particula-corazon {
+    position: absolute;
+    bottom: -5vh;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.5rem;
+    animation: subirCorazon linear forwards;
+}
+
+@keyframes subirCorazon {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+#pantalla-inicio {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 182, 193, 0.9);
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+#pantalla-inicio.oculto {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#btn-iniciar {
+    padding: 18px 40px;
+    font-size: 28px;
+    background: var(--color-boton);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+#btn-iniciar:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 77, 109, 0.6);
+}
+
+.corazon-btn {
+    animation: latido 1.5s infinite;
+}
+
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+
+#contenido-principal {
+    display: none; 
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- PERGAMINO --- */
+.pergamino-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 550px;
+    z-index: 20;
+}
+
+.pergamino {
+    background: var(--color-papel);
+    padding: 50px 40px;
+    border-radius: 3px;
+    box-shadow: 
+        inset 0 0 50px rgba(200, 150, 100, 0.1), 
+        10px 15px 30px rgba(0,0,0,0.2), 
+        -2px -2px 10px rgba(255,255,255,0.5);
+    text-align: center;
+    position: relative;
+}
+
+/* Efecto de doblez de papel viejo */
+.pergamino::before, .pergamino::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    top: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 100%);
+}
+.pergamino::before { left: 10px; }
+.pergamino::after { right: 10px; }
+
+.pergamino h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: var(--color-texto);
+    font-style: italic;
+    border-bottom: 2px solid rgba(74, 59, 50, 0.2);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.pergamino p {
+    
+    .contenido-texto {
+        max-height: 35vh; 
+        overflow-y: auto; 
+        padding-right: 15px; 
+        margin-bottom: 10px;
+        text-align: left; 
+    }
+
+    .contenido-texto {
+        max-height: 45vh; 
+    }
+
+    .contenido-texto::-webkit-scrollbar {
+        width: 6px;
+    }
+    .contenido-texto::-webkit-scrollbar-track {
+        background: rgba(139, 90, 43, 0.1); 
+        border-radius: 10px;
+    }
+    .contenido-texto::-webkit-scrollbar-thumb {
+        background: rgba(139, 90, 43, 0.4); 
+        border-radius: 10px;
+    }
+    .contenido-texto::-webkit-scrollbar-thumb:hover {
+        background: rgba(139, 90, 43, 0.6); 
+    }
+
+
+    .pergamino p {
+        font-size: 1.1rem; 
+        line-height: 1.6;
+        color: var(--color-texto);
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+}
+
+.firma {
+    margin-top: 40px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+
+.galeria-fotos {
+    width: 100%;
+    height: 100%;
+}
+
+.polaroid {
+    position: absolute;
+    background: white;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border-radius: 2px;
+    width: 16vw;
+    min-width: 140px;
+    max-width: 220px;
+    aspect-ratio: 1 / 1.15;
+    z-index: 5;
+}
+
+.foto-interior {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    border: 2px dashed #ccc; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.foto-interior img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.texto-guia {
+    color: #999;
+    font-family: sans-serif;
+    font-size: 0.9rem;
+}
+
+
+.foto-1 { 
+    top: 6%; left: 8%; 
+    transform: rotate(-8deg); 
+    animation: flotar1 4s ease-in-out infinite; 
+}
+.foto-2 { 
+    top: 8%; right: 8%; 
+    transform: rotate(5deg); 
+    animation: flotar2 3.5s ease-in-out infinite reverse; 
+}
+.foto-3 { 
+    bottom: 8%; left: 6%; 
+    transform: rotate(6deg); 
+    animation: flotar3 4.2s ease-in-out infinite; 
+}
+.foto-4 { 
+    bottom: 6%; right: 10%; 
+    transform: rotate(-5deg); 
+    animation: flotar4 3.8s ease-in-out infinite reverse; 
+}
+
+
+@keyframes flotar1 {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+    50% { transform: translate3d(0, -20px, 0) rotate(-6deg); }
+}
+@keyframes flotar2 {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(5deg); }
+    50% { transform: translate3d(0, -15px, 0) rotate(7deg); }
+}
+@keyframes flotar3 {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(6deg); }
+    50% { transform: translate3d(0, -25px, 0) rotate(4deg); }
+}
+@keyframes flotar4 {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(-5deg); }
+    50% { transform: translate3d(0, -18px, 0) rotate(-7deg); }
+}
+
+
+@media (max-width: 900px) {
+    body {
+        align-items: flex-start;
+        overflow-y: auto; 
+    }
+
+    #contenido-principal {
+        display: none; 
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        min-height: 100vh;
+        padding-top: 40px;
+    }
+
+    .pergamino-wrapper {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 90%;
+        margin-bottom: 50px;
+    }
+
+    .galeria-fotos {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 15px;
+        width: 90%;
+        max-width: 500px;
+        justify-items: center;
+        padding-bottom: 50px;
+    }
+
+    
+    .polaroid {
+        position: relative;
+        top: auto; left: auto; right: auto; bottom: auto;
+        width: 100%;
+        max-width: 180px;
+    }
+
+    
+    .foto-1 { animation: flotarMovil1 4s ease-in-out infinite; }
+    .foto-2 { animation: flotarMovil2 3.5s ease-in-out infinite reverse; }
+    .foto-3 { animation: flotarMovil1 4.2s ease-in-out infinite; }
+    .foto-4 { animation: flotarMovil2 3.8s ease-in-out infinite reverse; }
+
+    @keyframes flotarMovil1 {
+        0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
+        50% { transform: translate3d(0, -10px, 0) rotate(-2deg); }
+    }
+    @keyframes flotarMovil2 {
+        0%, 100% { transform: translate3d(0, 0, 0) rotate(2deg); }
+        50% { transform: translate3d(0, -10px, 0) rotate(2deg); }
+    }
+}
+
+
+.letra-burbuja {
+    display: inline-block;
+    
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;
+}
+
+.letra-burbuja:hover {
+    transform: translateY(-10px) scale(1.3) rotate(5deg);
+    color: var(--color-boton); 
+    cursor: default;
+}
